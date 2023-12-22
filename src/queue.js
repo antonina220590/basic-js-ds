@@ -15,30 +15,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 class Queue {
   constructor () { // здесь хранятся ссылки
-    this.first = null; //на начало очереди
-    this.last = null; // на конец очереди
+    this.firstQElement = null; //на начало очереди
+    this.lastQElement = null; // на конец очереди
   }
 
   getUnderlyingList() {
-    return this.first;
+    return this.firstQElement;
   }
 
   enqueue(value) {
     const node = new ListNode(value); //создаем очередной элемент
 
-    if(this.first) { //если какой-то элемент уже есть в очереди
-      this.last.next = node; //то элемент следующий за последним будет наш новый узел
-      this.last = node; //последний элемент теперь указывает на наш новый узел
+    if(this.firstQElement) { //если какой-то элемент уже есть в очереди
+      this.lastQElement.next = node; //то элемент следующий за последним будет наш новый узел
+      this.lastQElement = node; //последний элемент теперь указывает на наш новый узел
     }
-    if(!this.first) {//если элементов нет
-      this.first = node; // узел будет и первым элементом
-      this.last = node // и последним
+    if(!this.firstQElement) {//если элементов нет
+      this.firstQElement = node; // узел будет и первым элементом
+      this.lastQElement = node // и последним
     }
 
   }
   dequeue() {
-   const node = this.first; //ссылка на текущий первый элемент
-   this.first = this.first.next; // теперь начало - это следующий элемент
+   const node = this.firstQElement; //ссылка на текущий первый элемент
+   this.firstQElement = this.firstQElement.next; // теперь начало - это следующий элемент
 
    return node.value; //возвращаем значение первого элемента
   }
